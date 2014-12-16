@@ -1,6 +1,6 @@
 require 'aws-sdk'
 
-class Income < ActiveRecord::Base
+class Income < AWS::Record::HashModel
   string_attr :teamname
   string_attr :playername1
   string_attr :playername2
