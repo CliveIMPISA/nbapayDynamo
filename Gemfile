@@ -6,6 +6,7 @@ gem 'sinatra-contrib'
 gem 'nbasalaryscrape'
 gem 'nokogiri'
 gem 'json'
+gem 'eventmachine', github: "eventmachine/eventmachine"
 gem 'thin'
 
 
