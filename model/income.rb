@@ -1,4 +1,5 @@
 require 'aws-sdk'
+require 'json'
 
 class Income < AWS::Record::HashModel
   string_attr :teamname

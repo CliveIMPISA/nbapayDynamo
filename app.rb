@@ -161,4 +161,21 @@ class NbaPayDynamo < Sinatra::Base
     status 404
     'not found'
   end
+
+  get '/api/v1/incomes/?' do
+    content_type :json
+    body = request.body.read
+
+    begin
+      index = Income.all.map do |t|
+        { id: t.id, description: t.description,
+          created_at: t.created_at, updated_at: t.updated_at }
+        end
+      rescue => e
+        halt 400
+      end
+
+      index.to_json
+    end
+
 end
