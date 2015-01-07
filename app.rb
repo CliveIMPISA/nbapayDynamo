@@ -229,7 +229,7 @@ class NbaPayDynamo < Sinatra::Base
           @total = Result.find(params[:id])
           Result.attributes.update do |u|
             # replace values
-            u.set(:scrape => "get_team(teamname)")
+            u.set(:scraped => "get_team(teamname)")
           end
         rescue
           halt 400
