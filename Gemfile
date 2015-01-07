@@ -9,8 +9,6 @@ gem 'json'
 gem 'eventmachine', github: "eventmachine/eventmachine"
 gem 'thin'
 
-
-
 group :test do
 	gem 'minitest'
 	gem 'rack'

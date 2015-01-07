@@ -68,6 +68,7 @@ class NbaPayDynamo < Sinatra::Base
     if result.nil? || result.empty?
       halt 404
     else
+       
       result
     end
     result
