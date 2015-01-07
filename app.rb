@@ -209,7 +209,7 @@ class NbaPayDynamo < Sinatra::Base
 
       begin
         index = Result.all.map do |t|
-          { id: t.id, scrped: t.scraped,
+          { id: t.id, scraped: t.scraped,
             created_at: t.created_at, updated_at: t.updated_at }
           end
         rescue => e
