@@ -61,6 +61,10 @@ class NbaPayDynamo < Sinatra::Base
       playername1 = @double.playername1
       playername2 = @double.playername2
       players = [playername1, playername2]
+      results = Result.new
+      results.teamname = teamname
+      results.scraped = get_team(teamname)
+      results.save
     rescue
       halt 400
     end
@@ -108,6 +112,10 @@ class NbaPayDynamo < Sinatra::Base
       @total = Single.find(params[:id])
       teamname = @total.teamname
       playername1 = [@total.playername1]
+      results = Result.new
+      results.teamname = teamname
+      results.scraped = get_team(teamname)
+      results.save
     rescue
       halt 400
     end
