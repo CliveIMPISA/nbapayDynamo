@@ -226,9 +226,9 @@ class NbaPayDynamo < Sinatra::Base
         content_type :json
         logger.info "GET /api/v1/result/#{params[:id]}"
         begin
-          @total = Result.find(params[:id])
-          @total.scraped = "bu Hao"
-          @total.save
+          total = Result.find(params[:id])
+          total.scraped = "bu Hao"
+          total.save
 
 
           end
