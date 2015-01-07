@@ -68,14 +68,14 @@ class NbaPayDynamo < Sinatra::Base
     if result.nil? || result.empty?
       halt 404
     else
-       
+
       result
     end
     result
   end
 
   delete '/api/v1/playertotal/:id' do
-    income = Income.destroy(params[:id])
+    income = Single.destroy(params[:id])
   end
 
   post '/api/v1/playertotal' do
@@ -90,7 +90,7 @@ class NbaPayDynamo < Sinatra::Base
       puts e.message
       halt 400
     end
-    incomes = Income.new
+    incomes = Single.new
     incomes.teamname = req['teamname']
     incomes.playername1 = req['playername1']
 
@@ -103,7 +103,7 @@ class NbaPayDynamo < Sinatra::Base
     content_type :json
     logger.info "GET /api/v1/playertotal/#{params[:id]}"
     begin
-      @total = Income.find(params[:id])
+      @total = Single.find(params[:id])
       teamname = @total.teamname
       playername1 = [@total.playername1]
     rescue
