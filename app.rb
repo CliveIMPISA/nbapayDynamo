@@ -218,5 +218,19 @@ class NbaPayDynamo < Sinatra::Base
 
         index.to_json
       end
+      get '/api/v1/result/:id' do
+        content_type :json
+        logger.info "GET /api/v1/result/#{params[:id]}"
+        begin
+          @total = Result.find(params[:id])
+          teamname = @total.teamname
+          @total.scraped = get_team(teamname)
+          @total.save
+        rescue
+          halt 400
+        end
+
+        end
+      end
 
 end
