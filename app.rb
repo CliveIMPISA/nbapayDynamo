@@ -84,6 +84,10 @@ class NbaPayDynamo < Sinatra::Base
     single = Single.destroy(params[:id])
   end
 
+  delete '/api/v1/result/:id' do
+    single = Single.destroy(params[:id])
+  end
+
   post '/api/v1/playertotal' do
     content_type :json
     body = request.body.read
@@ -224,8 +228,7 @@ class NbaPayDynamo < Sinatra::Base
         begin
           @total = Result.find(params[:id])
           teamname = @total.teamname
-          @total.scraped = get_team(teamname)
-          @total.save
+          @total.scraped.update = get_team(teamname)          
         rescue
           halt 400
         end
