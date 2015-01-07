@@ -227,7 +227,7 @@ class NbaPayDynamo < Sinatra::Base
         logger.info "GET /api/v1/result/#{params[:id]}"
         begin
           @total = Result.find(params[:id])
-          @total.scraped = "get_team(teamname)"
+          @total.scraped = "list"
           @total.save
         rescue
           halt 400
