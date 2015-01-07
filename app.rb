@@ -1,7 +1,9 @@
 require 'sinatra/base'
 require 'sinatra'
 require 'json'
-require_relative 'model/income'
+require_relative 'model/single'
+require_relative 'model/double'
+require_relative 'model/result'
 require_relative 'helpers.rb'
 
 # nbasalaryscrape service
@@ -22,7 +24,7 @@ class NbaPayDynamo < Sinatra::Base
 
   delete '/api/v1/comparisons/:id' do
     begin
-      Income.destroy(params[:id])
+      Double.destroy(params[:id])
     rescue
       halt 404
     end
@@ -40,13 +42,13 @@ class NbaPayDynamo < Sinatra::Base
       puts e.message
       halt 400
     end
-    incomes = Income.new
-    incomes.teamname = req['teamname']
-    incomes.playername1 = req['playername1']
-    incomes.playername2 = req['playername2']
+    double = Double.new
+    double.teamname = req['teamname']
+    double.playername1 = req['playername1']
+    double.playername2 = req['playername2']
 
-    if incomes.save
-      redirect "/api/v1/comparisons/#{incomes.id}"
+    if double.save
+      redirect "/api/v1/comparisons/#{double.id}"
     end
   end
 
@@ -54,10 +56,10 @@ class NbaPayDynamo < Sinatra::Base
     content_type :json
     logger.info "GET /api/v1/comparisons/#{params[:id]}"
     begin
-      @income = Income.find(params[:id])
-      teamname = @income.teamname
-      playername1 = @income.playername1
-      playername2 = @income.playername2
+      @double = Double.find(params[:id])
+      teamname = @double.teamname
+      playername1 = @double.playername1
+      playername2 = @double.playername2
       players = [playername1, playername2]
     rescue
       halt 400
@@ -75,8 +77,8 @@ class NbaPayDynamo < Sinatra::Base
   end
 
   delete '/api/v1/playertotal/:id' do
-    income = Single.destroy(params[:id])
-  end
+    single = Single.destroy(params[:id])
+  end  
 
   post '/api/v1/playertotal' do
     content_type :json
@@ -90,12 +92,12 @@ class NbaPayDynamo < Sinatra::Base
       puts e.message
       halt 400
     end
-    incomes = Single.new
-    incomes.teamname = req['teamname']
-    incomes.playername1 = req['playername1']
+    single = Single.new
+    single.teamname = req['teamname']
+    single.playername1 = req['playername1']
 
-    if incomes.save
-      redirect "/api/v1/playertotal/#{incomes.id}"
+    if single.save
+      redirect "/api/v1/playertotal/#{single.id}"
     end
   end
 
@@ -163,12 +165,27 @@ class NbaPayDynamo < Sinatra::Base
     'not found'
   end
 
-  get '/api/v1/incomes/?' do
+  get '/api/v1/single/?' do
     content_type :json
     body = request.body.read
 
     begin
-      index = Income.all.map do |t|
+      index = Single.all.map do |t|
+        { id: t.id, description: t.description,
+          created_at: t.created_at, updated_at: t.updated_at }
+      end
+    rescue => e
+        halt 400
+    end
+
+      index.to_json
+  end
+  get '/api/v1/double/?' do
+    content_type :json
+    body = request.body.read
+
+    begin
+      index = Single.all.map do |t|
         { id: t.id, description: t.description,
           created_at: t.created_at, updated_at: t.updated_at }
         end
@@ -178,5 +195,20 @@ class NbaPayDynamo < Sinatra::Base
 
       index.to_json
     end
+    get '/api/v1/result/?' do
+      content_type :json
+      body = request.body.read
+
+      begin
+        index = Single.all.map do |t|
+          { id: t.id, description: t.description,
+            created_at: t.created_at, updated_at: t.updated_at }
+          end
+        rescue => e
+          halt 400
+        end
+
+        index.to_json
+      end
 
 end
