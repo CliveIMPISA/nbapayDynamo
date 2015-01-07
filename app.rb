@@ -78,7 +78,7 @@ class NbaPayDynamo < Sinatra::Base
 
   delete '/api/v1/playertotal/:id' do
     single = Single.destroy(params[:id])
-  end  
+  end
 
   post '/api/v1/playertotal' do
     content_type :json
@@ -185,7 +185,7 @@ class NbaPayDynamo < Sinatra::Base
     body = request.body.read
 
     begin
-      index = Single.all.map do |t|
+      index = Double.all.map do |t|
         { id: t.id, description: t.description,
           created_at: t.created_at, updated_at: t.updated_at }
         end
@@ -200,8 +200,8 @@ class NbaPayDynamo < Sinatra::Base
       body = request.body.read
 
       begin
-        index = Single.all.map do |t|
-          { id: t.id, description: t.description,
+        index = Result.all.map do |t|
+          { id: t.id, scrped: t.scraped,
             created_at: t.created_at, updated_at: t.updated_at }
           end
         rescue => e
