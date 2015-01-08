@@ -230,26 +230,23 @@ class NbaPayDynamo < Sinatra::Base
         body = request.body.read
         begin
           puts "Good"
-          saved_results = all_teams.to_json
+          allteams = all_teams.to_json
           # puts saved_results
           # if saved_results.nil? || saved_results.empty?
           #   allteams = HTTParty.get api_url('allteams')
-          #   allteams.each do |team|
-          #     populate = Result.new
-          #     populate.teamname = team
-          #     populate.scraped = HTTParty.get api_url("#{team}.json")
-          #     populate.save
-          #
-          #   end
+          allteams.each do |team|
+            populate = Result.new
+            populate.teamname = team
+            populate.scraped = HTTParty.get "api/v1/#{team}.json")
+            populate.save
+
+          end
           # end
         rescue
           halt 400
         end
       end
-      API_VER = '/api/v1/'
-      def api_url(resource)
-        URI.join(API_VER, resource).to_s
-      end
+
 
       get '/api/v1/result/:id' do
         content_type :json
