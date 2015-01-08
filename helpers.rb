@@ -137,10 +137,11 @@ def get_team(teamname)
       income.playername2 = req['playername2'].to_json
       income
     end
+
     def all_teams
-      var = SalaryScraper::BasketballReference.new
-      teams = var.ALL_TEAMS
-      teams
+      var = SalaryScraper::BasketballReference::ALL_TEAMS
+      puts var
+      var
     end
 
 end
