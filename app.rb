@@ -225,27 +225,24 @@ class NbaPayDynamo < Sinatra::Base
       end
 
       get '/api/v1/populateresults' do
-        puts "Good"
         content_type :json
         body = request.body.read
         begin
           puts "Good"
           allteams = all_teams.to_json
-          # puts saved_results
-          # if saved_results.nil? || saved_results.empty?
-          #   allteams = HTTParty.get api_url('allteams')
+
           allteams = JSON.parse(allteams)
           allteams.each do |team|
             populate = Result.new
             populate.teamname = team
             populate.scraped = get_team(team).to_json
             populate.save
-
           end
-          # end
+
         rescue
           halt 400
         end
+        "Db create"
       end
 
 
