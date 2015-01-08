@@ -114,9 +114,6 @@ class NbaPayDynamo < Sinatra::Base
       @total = Single.find(params[:id])
       teamname = @total.teamname
       playername1 = [@total.playername1]
-      results = Result.find(teamname)
-      result = results.scraped
-
     rescue
       halt 400
     end
