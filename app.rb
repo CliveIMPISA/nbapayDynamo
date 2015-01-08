@@ -131,10 +131,8 @@ class NbaPayDynamo < Sinatra::Base
 
   end
 
-  get '/api/v1/allteams' do
-    content_type :json
+  get '/api/v1/allteams' do    
     all_teams.to_json
-
   end
 
   get '/api/v1/players/:teamname.json' do
