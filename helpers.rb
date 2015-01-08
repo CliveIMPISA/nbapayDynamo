@@ -14,8 +14,7 @@ def get_team(teamname)
 
     def get_team_players(teamname)
       begin
-        temp = Result.find_id(teamname)
-        team = temp.scraped
+        team =  Result.find_id(teamname)
         team_players = []
         team.each do |player_salary_scrape|
           team_players << player_salary_scrape['Player']
@@ -29,8 +28,7 @@ def get_team(teamname)
     def player_salary_data(teamname, player_name)
 
       begin
-        temp = Result.find_id(teamname)
-        salary_scrape = temp.scraped
+        salary_scrape = Result.find_id(teamname)
         player_scrape = []
         player_name.each do |each_player|
           salary_scrape.each do |data_row|
@@ -60,8 +58,8 @@ def get_team(teamname)
     def player_total_salary(teamname, player_name)
       players = []
       begin
-        temp = Result.find_id(teamname)
-        salary_scrape = temp.scraped
+
+        salary_scrape = Result.find_id(teamname)
         player_name.each do |each_player|
           salary_scrape.each do |data_row|
             if data_row['Player'] == each_player
@@ -81,8 +79,8 @@ def get_team(teamname)
     def two_players_salary_data(teamname, player_name)
       player_scrape = []
       begin
-        temp = Result.find_id(teamname)
-        salary_scrape = temp.scraped
+
+        salary_scrape = Result.find_id(teamname)
 
         player_name.each do |each_player|
           salary_scrape.each do |data_row|
