@@ -14,7 +14,7 @@ def get_team(teamname)
 
     def get_team_players(teamname)
       begin
-        team =  Result.find_id(teamname)
+        team = db_ids(teamname)
         team_players = []
         team.each do |player_salary_scrape|
           team_players << player_salary_scrape['Player']
@@ -23,6 +23,30 @@ def get_team(teamname)
         halt 404
       end
       team_players
+    end
+
+    def db_ids(teamname)
+      ids = []
+      t = null
+      dynamo_db = AWS::DynamoDB.new
+      dynamo_db.tables.each do |x|
+        if x.name == 'Result'
+          x.load_schema.items.select('id', 'category').each do |item_data|
+            ids << item_data.attributes['id']
+          end
+        end
+      end
+      puts ids
+
+      ids.each do |id|
+        temp = Result.find(id)
+
+        if temp.teamname == teamname
+          puts temp.scraped
+          t = temp.scraped#return temp.scraped
+        end
+      end
+      t
     end
 
     def player_salary_data(teamname, player_name)
