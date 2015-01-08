@@ -1,4 +1,5 @@
 require 'nbasalaryscrape'
+require_relative 'model/result'
 
 module Helpers
 
@@ -13,7 +14,7 @@ def get_team(teamname)
 
     def get_team_players(teamname)
       begin
-        team = get_team(teamname)
+        team = Result.find(teamname)
         team_players = []
         team.each do |player_salary_scrape|
           team_players << player_salary_scrape['Player']
@@ -27,7 +28,7 @@ def get_team(teamname)
     def player_salary_data(teamname, player_name)
 
       begin
-        salary_scrape = get_team(teamname)
+        salary_scrape = Result.find(teamname)
         player_scrape = []
         player_name.each do |each_player|
           salary_scrape.each do |data_row|
@@ -57,7 +58,7 @@ def get_team(teamname)
     def player_total_salary(teamname, player_name)
       players = []
       begin
-        salary_scrape = get_team(teamname)
+        salary_scrape = Result.find(teamname)
         player_name.each do |each_player|
           salary_scrape.each do |data_row|
             if data_row['Player'] == each_player
@@ -77,7 +78,7 @@ def get_team(teamname)
     def two_players_salary_data(teamname, player_name)
       player_scrape = []
       begin
-        salary_scrape = get_team(teamname)
+        salary_scrape = Result.find(teamname)
 
         player_name.each do |each_player|
           salary_scrape.each do |data_row|
@@ -135,6 +136,11 @@ def get_team(teamname)
       income.playername1 = req['playername1'].to_json
       income.playername2 = req['playername2'].to_json
       income
+    end
+    def all_teams
+      var = SalaryScraper::BasketballReference.new
+      teams = var.ALL_TEAMS
+      teams
     end
 
 end

@@ -61,10 +61,7 @@ class NbaPayDynamo < Sinatra::Base
       playername1 = @double.playername1
       playername2 = @double.playername2
       players = [playername1, playername2]
-      results = Result.new
-      results.teamname = teamname
-      results.scraped = get_team(teamname)
-      results.save
+
     rescue
       halt 400
     end
@@ -116,10 +113,9 @@ class NbaPayDynamo < Sinatra::Base
       @total = Single.find(params[:id])
       teamname = @total.teamname
       playername1 = [@total.playername1]
-      results = Result.new
-      results.teamname = teamname
-      results.scraped = get_team(teamname)
-      results.save
+      results = Result.find(teamname)
+      result = results.scraped
+
     rescue
       halt 400
     end
@@ -132,6 +128,12 @@ class NbaPayDynamo < Sinatra::Base
   get '/api/v1/:teamname.json' do
       content_type :json
       get_team(params[:teamname]).to_json
+
+  end
+
+  get '/api/v1/allteams' do
+    content_type :json
+    all_teams.to_json
 
   end
 
