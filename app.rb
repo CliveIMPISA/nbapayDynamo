@@ -213,10 +213,10 @@ class NbaPayDynamo < Sinatra::Base
         index = Result.all.map do |t|
           { id: t.id, scraped: t.scraped,
             created_at: t.created_at, updated_at: t.updated_at }
-          end
-        rescue => e
-          halt 400
         end
+      rescue => e
+        halt 400
+      end
 
         index.to_json
       end
@@ -241,6 +241,21 @@ class NbaPayDynamo < Sinatra::Base
         end
         "Db create"
       end
+
+      # get '/api/v1/findid/:teamname' do
+      #   content_type :json
+      #
+      #   begin
+      #     Result.all do |t|
+      #       if t.teamname == params[:teamname]
+      #         return t.id
+      #       end
+      #     end
+      #   rescue
+      #     halt 400
+      #   end
+      #
+      # end
 
 
       get '/api/v1/result/:id' do

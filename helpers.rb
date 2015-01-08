@@ -13,7 +13,7 @@ def get_team(teamname)
     end
 
     def get_team_players(teamname)
-      begin
+      begin      
         temp = Result.find(teamname)
         team = temp.scraped
         team_players = []
@@ -131,7 +131,7 @@ def get_team(teamname)
     def back_to_money(data)
       money = "$#{data.to_s.reverse.gsub(/...(?=.)/, '\&,').reverse}"
       money
-    end    
+    end
 
     def all_teams
       var = SalaryScraper::BasketballReference::ALL_TEAMS
