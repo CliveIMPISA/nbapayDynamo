@@ -14,7 +14,8 @@ def get_team(teamname)
 
     def get_team_players(teamname)
       begin
-        team = Result.find(teamname)
+        temp = Result.find(teamname)
+        team = temp.scraped
         team_players = []
         team.each do |player_salary_scrape|
           team_players << player_salary_scrape['Player']
@@ -28,7 +29,8 @@ def get_team(teamname)
     def player_salary_data(teamname, player_name)
 
       begin
-        salary_scrape = Result.find(teamname)
+        temp = Result.find(teamname)
+        salary_scrape = temp.scraped
         player_scrape = []
         player_name.each do |each_player|
           salary_scrape.each do |data_row|
@@ -58,7 +60,8 @@ def get_team(teamname)
     def player_total_salary(teamname, player_name)
       players = []
       begin
-        salary_scrape = Result.find(teamname)
+        temp = Result.find(teamname)
+        salary_scrape = temp.scraped
         player_name.each do |each_player|
           salary_scrape.each do |data_row|
             if data_row['Player'] == each_player
@@ -78,7 +81,8 @@ def get_team(teamname)
     def two_players_salary_data(teamname, player_name)
       player_scrape = []
       begin
-        salary_scrape = Result.find(teamname)
+        temp = Result.find(teamname)
+        salary_scrape = temp.scraped
 
         player_name.each do |each_player|
           salary_scrape.each do |data_row|
@@ -127,16 +131,7 @@ def get_team(teamname)
     def back_to_money(data)
       money = "$#{data.to_s.reverse.gsub(/...(?=.)/, '\&,').reverse}"
       money
-    end
-
-    def new_income(req)
-      income = Income.new
-      income.description = req['description'].to_json
-      income.teamname = req['teamname'].to_json
-      income.playername1 = req['playername1'].to_json
-      income.playername2 = req['playername2'].to_json
-      income
-    end
+    end    
 
     def all_teams
       var = SalaryScraper::BasketballReference::ALL_TEAMS
