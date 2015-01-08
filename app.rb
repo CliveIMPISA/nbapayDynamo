@@ -234,6 +234,7 @@ class NbaPayDynamo < Sinatra::Base
           # puts saved_results
           # if saved_results.nil? || saved_results.empty?
           #   allteams = HTTParty.get api_url('allteams')
+          allteams = JSON.parse(allteams)
           allteams.each do |team|
             populate = Result.new
             populate.teamname = team
