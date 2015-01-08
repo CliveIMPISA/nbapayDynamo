@@ -230,18 +230,18 @@ class NbaPayDynamo < Sinatra::Base
         body = request.body.read
         begin
           puts "Good"
-          saved_results = HTTParty.get api_url('result')
-          puts saved_results
-          if saved_results.nil? || saved_results.empty?
-            allteams = HTTParty.get api_url('allteams')
-            allteams.each do |team|
-              populate = Result.new
-              populate.teamname = team
-              populate.scraped = HTTParty.get api_url("#{team}.json")
-              populate.save
-
-            end
-          end
+          saved_results = all_teams.to_json
+          # puts saved_results
+          # if saved_results.nil? || saved_results.empty?
+          #   allteams = HTTParty.get api_url('allteams')
+          #   allteams.each do |team|
+          #     populate = Result.new
+          #     populate.teamname = team
+          #     populate.scraped = HTTParty.get api_url("#{team}.json")
+          #     populate.save
+          #
+          #   end
+          # end
         rescue
           halt 400
         end
