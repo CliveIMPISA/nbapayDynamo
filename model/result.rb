@@ -14,12 +14,12 @@ class Result < AWS::Record::HashModel
     all.each { |r| r.delete }
   end
   def self.find_id(team)
-    id = ''
+    scrape=''
     all.each do |r|
       if r.teamname == team
-        id = r.id
+        scrape = r.scraped
       end
     end
-    id
+    scrape
   end
 end
