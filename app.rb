@@ -5,6 +5,7 @@ require_relative 'model/single'
 require_relative 'model/double'
 require_relative 'model/result'
 require_relative 'helpers.rb'
+require 'httparty'
 
 # nbasalaryscrape service
 class NbaPayDynamo < Sinatra::Base
@@ -224,12 +225,15 @@ class NbaPayDynamo < Sinatra::Base
       end
 
       get '/api/v1/populateresults' do
+        puts "Good"
         content_type :json
         body = request.body.read
         begin
-          saved_results = HTTParty.get api_url("result")
+          puts "Good"
+          saved_results = HTTParty.get api_url('result')
+          puts saved_results
           if saved_results.nil? || saved_results.empty?
-            allteams = HTTParty.get api_url("allteams")
+            allteams = HTTParty.get api_url('allteams')
             allteams.each do |team|
               populate = Result.new
               populate.teamname = team
@@ -242,6 +246,11 @@ class NbaPayDynamo < Sinatra::Base
           halt 400
         end
       end
+      API_VER = '/api/v1/'
+      def api_url(resource)
+        URI.join(API_VER, resource).to_s
+      end
+
       get '/api/v1/result/:id' do
         content_type :json
         logger.info "GET /api/v1/result/#{params[:id]}"

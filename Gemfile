@@ -8,6 +8,7 @@ gem 'nokogiri'
 gem 'json'
 gem 'eventmachine', github: "eventmachine/eventmachine"
 gem 'thin'
+gem 'httparty'
 
 group :test do
 	gem 'minitest'

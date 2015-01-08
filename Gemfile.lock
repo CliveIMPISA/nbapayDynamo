@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/eventmachine/eventmachine.git
-  revision: a77dc8ccc9a73aa15317da12f25e8f7d7bdfb828
+  revision: 487305151d1f5441b597400fa8d062361e2d86b2
   specs:
-    eventmachine (1.0.3)
+    eventmachine (1.0.4)
 
 GEM
   remote: http://rubygems.org/
@@ -14,10 +14,14 @@ GEM
       nokogiri (>= 1.4.4)
     backports (3.6.4)
     daemons (1.1.9)
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     json (1.8.1)
     mini_portile (0.6.1)
     minitest (5.5.0)
     multi_json (1.10.1)
+    multi_xml (0.5.5)
     nbasalaryscrape (0.1.2)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
@@ -50,6 +54,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk
   eventmachine!
+  httparty
   json
   minitest
   nbasalaryscrape
