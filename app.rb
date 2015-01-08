@@ -237,7 +237,7 @@ class NbaPayDynamo < Sinatra::Base
           allteams.each do |team|
             populate = Result.new
             populate.teamname = team
-            populate.scraped = HTTParty.get "api/v1/#{team}.json")
+            populate.scraped = get_team(team).to_json
             populate.save
 
           end
