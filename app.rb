@@ -225,15 +225,15 @@ class NbaPayDynamo < Sinatra::Base
         content_type :json
         body = request.body.read
         begin
-          puts "Good"
-          allteams = all_teams.to_json
-
-          allteams = JSON.parse(allteams)
-          allteams.each do |team|
-            populate = Result.new
-            populate.teamname = team
-            populate.scraped = get_team(team).to_json
-            populate.save
+          if Result.all.nil? || Result.all.empty?
+            allteams = all_teams.to_json
+            allteams = JSON.parse(allteams)
+            allteams.each do |team|
+              populate = Result.new
+              populate.teamname = team
+              populate.scraped = get_team(team).to_json
+              populate.save
+            end
           end
 
         rescue
