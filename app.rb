@@ -233,13 +233,13 @@ class NbaPayDynamo < Sinatra::Base
               populate.teamname = team
               populate.scraped = get_team(team).to_json
               populate.save
-          
+
           end
 
         rescue
           halt 400
         end
-        "Db create"
+        "Table Loaded!"
       end
 
       # get '/api/v1/findid/:teamname' do
