@@ -1,0 +1,67 @@
+GIT
+  remote: git://github.com/eventmachine/eventmachine.git
+  revision: 487305151d1f5441b597400fa8d062361e2d86b2
+  specs:
+    eventmachine (1.0.4)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    aws-sdk (1.59.1)
+      aws-sdk-v1 (= 1.59.1)
+    aws-sdk-v1 (1.59.1)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
+    backports (3.6.4)
+    daemons (1.1.9)
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
+    json (1.8.1)
+    mini_portile (0.6.1)
+    minitest (5.5.0)
+    multi_json (1.10.1)
+    multi_xml (0.5.5)
+    nbasalaryscrape (0.1.2)
+    nokogiri (1.6.5)
+      mini_portile (~> 0.6.0)
+    rack (1.5.2)
+    rack-protection (1.5.3)
+      rack
+    rack-test (0.6.2)
+      rack (>= 1.0)
+    rake (10.4.2)
+    sinatra (1.4.5)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    sinatra-contrib (1.4.2)
+      backports (>= 2.0)
+      multi_json
+      rack-protection
+      rack-test
+      sinatra (~> 1.4.0)
+      tilt (~> 1.3)
+    thin (1.6.3)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0)
+      rack (~> 1.0)
+    tilt (1.4.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  aws-sdk
+  eventmachine!
+  httparty
+  json
+  minitest
+  nbasalaryscrape
+  nokogiri
+  rack
+  rack-test
+  rake
+  sinatra
+  sinatra-contrib
+  thin
